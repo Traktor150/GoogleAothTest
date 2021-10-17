@@ -6,3 +6,9 @@ exports.index = (req, res) => {
 exports.loggedIn = (req, res) => {
     res.sendfile('public/loggedIn.html');
 };
+exports.policy = (req, res) => {
+    res.sendfile('public/policy.html');
+};
+exports.terms = (req, res) => {
+    res.sendfile('public/terms.html');
+};

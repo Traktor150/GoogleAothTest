@@ -8,6 +8,11 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    if (window.location.href == 'http://localhost:8042/loggedIn') {
+        console.log('Signed in')
+    } else {
+        location.href = 'http://localhost:8042/loggedIn';
+    }
 }
 
 function signOut() {
@@ -15,6 +20,7 @@ function signOut() {
     auth2.signOut().then(function() {
         console.log('User signed out.');
     });
+    location.href = 'http://localhost:8042';
 }
 
 function handleCredentialResponse(response) {

@@ -3,6 +3,6 @@
 exports.index = (req, res) => {
     res.sendfile('public/index.html');
 };
-exports.test = (req, res) => {
-    res.sendfile('public/test.html');
+exports.loggedIn = (req, res) => {
+    res.sendfile('public/loggedIn.html');
 };

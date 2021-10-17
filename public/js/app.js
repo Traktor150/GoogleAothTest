@@ -25,9 +25,9 @@ function signOut() {
 
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
+
     // decodeJwtResponse() is a custom function defined by you
     // to decode the credential response.
-    console.log('hejhej')
     const responsePayload = decodeJwtResponse(response.credential);
 
     console.log("ID: " + responsePayload.sub);
@@ -42,6 +42,5 @@ window.onload = function() {
         client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
         callback: handleCredentialResponse
     });
-    console.log('hej');
     google.accounts.id.prompt(); // also display the One Tap dialog
 }

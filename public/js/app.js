@@ -5,6 +5,8 @@ console.log('app.js is alive!')
 function onSignIn(googleUser) {
     // This function has to do with the old way button (should not be used anymore)
     // The function gets information about the user on sign in
+    // Link to documentation
+    // https://developers.google.com/identity/sign-in/web/sign-in#get_profile_information
 
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -22,20 +24,32 @@ function onSignIn(googleUser) {
 }
 
 function signOut() {
+    // This function is called when sign out is pressed, signs out user
+    // This is the old way (should not be used anymore)
+    // Link to documentation
+    // https://developers.google.com/identity/sign-in/web/sign-in#sign_out_a_user
+
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function() {
         console.log('User signed out.');
     });
-    location.href = 'http://localhost:8042';
+    location.href = 'http://localhost:8042'; // Redirects to another page, goes back to home after signing out
 }
+
+// onSignIn and signOut are the old ways and have nothing to do with the new way,
+// old way and new way are completely separate from each other
 
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
+    // "credential" is a coded id token that has the users information
+    // Needs to be decoded to be useful
 
+    const responsePayload = decodeJwtResponse(response.credential);
     // decodeJwtResponse() is a custom function defined by you
     // to decode the credential response
     // https://jwt.io/
-    const responsePayload = decodeJwtResponse(response.credential);
+    // This website can be used to decode the token which in this case is "response.credential"
+    // Unsure of how it can be used in programming
 
     console.log("ID: " + responsePayload.sub);
     console.log('Full Name: ' + responsePayload.name);

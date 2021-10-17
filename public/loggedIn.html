@@ -6,31 +6,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com">
-
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-
     <link rel="stylesheet" href="css/style.css">
     <script src="js/app.js"></script>
 
-    <title>Logged in</title>
+    <title>GoogleAPI Demo - OAK - Logged in</title>
 </head>
 
 <body>
-    <h1>This is the logged in page</h1>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <a href="#" onclick="signOut();">Sign out</a>
+    <h1>Logged in <br> GoogleAPI Demo - OAK</h1>
+
+    <div>
+        <!-- 
+            This is the old way and should not be used anymore         
+            Link to documentation
+            https://developers.google.com/identity/gsi/web/guides/migration#the_old_way
+        -->
+
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com">
+        <!-- Calls to Google libraries -->
+
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <!-- Shows the sign in button, changed to "Signed in" after successful log in -->
+        <a href="#" onclick="signOut();">Sign out</a>
+        <!-- When pressed calls to a function that signs out user, does not affect new way -->
+    </div>
+
+    <hr>
 
     <a href="/">Home</a>
     <a href="loggedIn">Logged in</a>
     <a href="terms">Terms of Service</a>
     <a href="policy">Privacy Policy</a>
 
-    <div id="g_id_onload" data-client_id="732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com" data-ux_mode="redirect" data-login_uri="http://localhost:8042/loggedIn" data-callback="handleCredentialResponse">
-    </div>
-    <div class="g_id_signin" data-type="standard"></div>
+    <hr>
 
+    <div>
+        <!--
+            This is the new way and should be used 
+            This whole div could be called personalized button, redirect mode
+            Because button apperance can change and user is redirected after sign in
+            Another way is "One Tap" which is used also used (top right of screen on web)
+            One tap is called to in app.js and not here
+            Popup mode uses a popup window, can be used to redirect user but is harder
+            Choose redirect mode because it is easier to redirect user
+            Currently One Tap can not redirect user, needs to be looked in to
+            Link to documentation
+            https://developers.google.com/identity/gsi/web/guides/migration#the_new_way
+        -->
+
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <!-- Calls to the Google library -->
+
+        <div id="g_id_onload" data-client_id="732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com" data-ux_mode="redirect" data-login_uri="http://localhost:8042/" data-callback="handleCredentialResponse"></div>
+        <!-- 
+            data-client_id is the key created when making a new credential, 
+            data-ux_mode specifies which mode to be used, popup is default,
+            data-login_uri specifies where to go after sign in, currently goes to index.html,
+            data-callback calls to whatever function is indicated,
+            data-login_uri and data-callback are incompatible, only one can be used at a time
+            data-login_uri takes precedence, therfore data-callback is not being used if data-login_uri is also used
+        -->
+
+        <div class="g_id_signin" data-type="standard"></div>
+        <!-- 
+            This is visual representation of the button
+            does not change after successful log in, unlike old way
+        -->
+    </div>
 </body>
 
 </html>

@@ -43,6 +43,9 @@ function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     // "credential" is a coded id token that has the users information
     // Needs to be decoded to be useful
+    // JWT stands for JSON Web Token
+    // Link to documentation
+    // https://developers.google.com/identity/gsi/web/guides/handle-credential-responses-js-functions
 
     const responsePayload = decodeJwtResponse(response.credential);
     // decodeJwtResponse() is a custom function defined by you
@@ -57,16 +60,28 @@ function handleCredentialResponse(response) {
     console.log('Family Name: ' + responsePayload.family_name);
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
+    // This is what shows user information
+    // responePayload conatains the information from the decoded JWT
 }
 window.onload = function() {
+    // Currently the code inside google.accounts.id.initialize does nothing,
+    // although may be used to redirect when using popupmode, unsure of how
+    // Link to documentation
+    // Link to documentation
+    // https://developers.google.com/identity/gsi/web/reference/js-reference#google.accounts.id.initialize
+
     google.accounts.id.initialize({
         client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
-        callback: handleCredentialResponse
+        callback: handleCredentialResponse,
     });
-    google.accounts.id.prompt(); // also display the One Tap dialog
+    google.accounts.id.prompt(); // Displays the One Tap window
 }
 
 function decodeJwtResponse(token) {
+    // This is what decides the JWT
+    // There are probably several ways to do this
+    // Got this from https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
+
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {

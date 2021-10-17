@@ -16,3 +16,21 @@ function signOut() {
         console.log('User signed out.');
     });
 }
+
+function handleCredentialResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+}
+
+window.onload = function() {
+    google.accounts.id.initialize({
+        client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"), {
+            theme: "outline",
+            size: "large"
+        } // customization attributes
+    );
+    google.accounts.id.prompt(); // also display the One Tap dialog
+}

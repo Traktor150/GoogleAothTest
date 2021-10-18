@@ -1,43 +1,29 @@
 'use strict';
 
 console.log('app.js is alive!')
+document.cookie;
 
-function onSignIn(googleUser) {
-    // This function has to do with the old way button (should not be used anymore)
-    // The function gets information about the user on sign in
-    // Link to documentation
-    // https://developers.google.com/identity/sign-in/web/sign-in#get_profile_information
-
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-
-    // if (window.location.href == 'http://localhost:8042/loggedIn') {
-    //     console.log('Signed in')
-    // } else {
-    //     location.href = 'http://localhost:8042/loggedIn';
-    // }
-    // This if else is what redirects between pages, there may be another way to do this
-    // But not important since this is the old way and should not be used anymore
+function showCookies() {
+    const output = document.getElementById('cookies')
+    output.textContent = '> ' + document.cookie
 }
 
-function signOut() {
-    // This function is called when sign out is pressed, signs out user
-    // This is the old way (should not be used anymore)
-    // Link to documentation
-    // https://developers.google.com/identity/sign-in/web/sign-in#sign_out_a_user
-
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function() {
-        console.log('User signed out.');
-    });
-    // location.href = 'http://localhost:8042'; // Redirects to another page, goes back to home after signing out
+function clearOutputCookies() {
+    const output = document.getElementById('cookies')
+    output.textContent = ''
 }
 
-// onSignIn and signOut are the old ways and have nothing to do with the new way,
-// old way and new way are completely separate from each other
+function checkCookieHasASpecificValue(credential) {
+    if (document.cookie.indexOf(credential)) {
+        const output = document.getElementById('a-specific-value-of-the-cookie')
+        output.textContent = '> The cookie "reader" has a value of "1"'
+    }
+}
+
+function clearASpecificValueOfTheCookie() {
+    const output = document.getElementById('a-specific-value-of-the-cookie')
+    output.textContent = ''
+}
 
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
@@ -46,6 +32,9 @@ function handleCredentialResponse(response) {
     // JWT stands for JSON Web Token
     // Link to documentation
     // https://developers.google.com/identity/gsi/web/guides/handle-credential-responses-js-functions
+
+    checkCookieHasASpecificValue(response.credential)
+    document.cookie = response.credential;
 
     const responsePayload = decodeJwtResponse(response.credential);
     // decodeJwtResponse() is a custom function defined by you
@@ -62,6 +51,7 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     // This is what shows user information
     // responePayload conatains the information from the decoded JWT
+
 }
 window.onload = function() {
     // Currently the code inside google.accounts.id.initialize does nothing,
@@ -74,7 +64,6 @@ window.onload = function() {
         client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
         callback: handleCredentialResponse,
     });
-    google.accounts.id.prompt(); // Displays the One Tap window
 }
 
 function decodeJwtResponse(token) {

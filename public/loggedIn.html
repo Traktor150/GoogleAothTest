@@ -15,16 +15,6 @@
 <body>
     <h1>Logged in <br> GoogleAPI Demo - OAK</h1>
 
-    <div>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <meta name="google-signin-client_id" content="732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com">
-
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <a href="#" onclick="signOut();">Sign out</a>
-    </div>
-
-    <hr>
-
     <a href="/">Home</a>
     <a href="loggedIn">Logged in</a>
     <a href="terms">Terms of Service</a>
@@ -42,6 +32,27 @@
         -->
 
         <div class="g_id_signin" data-type="standard"></div>
+    </div>
+    <button onclick="showCookies()">Show cookies</button>
+
+    <button onclick="clearOutputCookies()">
+      Clear
+    </button>
+
+    <div>
+        <code id="cookies"></code>
+    </div>
+    <hr>
+    <button onclick="checkCookieHasASpecificValue()">
+        Check that a cookie has a specific value
+      </button>
+
+    <button onclick="clearASpecificValueOfTheCookie()">
+        Clear
+      </button>
+
+    <div>
+        <code id="a-specific-value-of-the-cookie"></code>
     </div>
 </body>
 

@@ -14,11 +14,11 @@ function onSignIn(googleUser) {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-    if (window.location.href == 'http://localhost:8042/loggedIn') {
-        console.log('Signed in')
-    } else {
-        location.href = 'http://localhost:8042/loggedIn';
-    }
+    // if (window.location.href == 'http://localhost:8042/loggedIn') {
+    //     console.log('Signed in')
+    // } else {
+    //     location.href = 'http://localhost:8042/loggedIn';
+    // }
     // This if else is what redirects between pages, there may be another way to do this
     // But not important since this is the old way and should not be used anymore
 }
@@ -33,7 +33,7 @@ function signOut() {
     auth2.signOut().then(function() {
         console.log('User signed out.');
     });
-    location.href = 'http://localhost:8042'; // Redirects to another page, goes back to home after signing out
+    // location.href = 'http://localhost:8042'; // Redirects to another page, goes back to home after signing out
 }
 
 // onSignIn and signOut are the old ways and have nothing to do with the new way,

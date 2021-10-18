@@ -54,7 +54,6 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     // This is what shows user information
     // responePayload conatains the information from the decoded JWT
-
 }
 window.onload = function() {
     // Currently the code inside google.accounts.id.initialize does nothing,

@@ -1,7 +1,10 @@
 'use strict';
 
 console.log('app.js is alive!')
-document.cookie;
+
+// A new g_csrf_token is created eveytime a new user logs in
+// If same user logs in twice no new g_csrf_token is created
+// g_csrf_token probalby has a time limit
 
 function showCookies() {
     const output = document.getElementById('cookies')

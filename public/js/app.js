@@ -1,7 +1,6 @@
 'use strict';
 
 console.log('app.js is alive!')
-document.cookie;
 
 function showCookies() {
     const output = document.getElementById('cookies')
@@ -33,8 +32,8 @@ function handleCredentialResponse(response) {
     // Link to documentation
     // https://developers.google.com/identity/gsi/web/guides/handle-credential-responses-js-functions
 
-    checkCookieHasASpecificValue(response.credential)
-    document.cookie = response.credential;
+    // checkCookieHasASpecificValue(response.credential)
+    // document.cookie = response.credential;
 
     const responsePayload = decodeJwtResponse(response.credential);
     // decodeJwtResponse() is a custom function defined by you
@@ -54,9 +53,7 @@ function handleCredentialResponse(response) {
 
 }
 window.onload = function() {
-    // Currently the code inside google.accounts.id.initialize does nothing,
-    // although may be used to redirect when using popupmode, unsure of how
-    // Link to documentation
+    // Calls to fun
     // Link to documentation
     // https://developers.google.com/identity/gsi/web/reference/js-reference#google.accounts.id.initialize
 

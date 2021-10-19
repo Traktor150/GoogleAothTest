@@ -35,38 +35,10 @@
     <hr>
 
     <div>
-        <!-- 
-            This whole div could be called personalized button, redirect mode
-            Because button apperance can change and user is redirected after sign in
-            Another way is "One Tap" which is used also used (top right of screen on web)
-            One tap is called to in app.js and not here
-            Popup mode uses a popup window, can be used to redirect user but is harder
-            Choose redirect mode because it is easier to redirect user
-            Currently One Tap can not redirect user, needs to be looked in to
-            Link to documentation
-            https://developers.google.com/identity/gsi/web/guides/migration#the_new_way 
-        -->
-
         <!-- Calls to the Google library -->
         <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-        <!-- 
-            data-client_id is the key created when making a new credential, 
-            data-ux_mode specifies which mode to be used, popup is default,
-            data-login_uri specifies where to go after sign in, currently goes to loggedIn.html,
-            data-callback calls to whatever function is indicated,
-            data-login_uri and data-callback are incompatible, only one can be used at a time
-            If redirect mode is being used, data-login_uri takes precedence
-            If popup mode is being used, data-callback takes precedence
-            Workaorund probably exists
-            Look at this for more information about the two modes
-            https://developers.google.com/identity/gsi/web/guides/migration#the_new_way
-            If the personalized button is pressed user is automatically redirected
-            If One Tap is pressed handleCredentialResponse is called and user information is show in console log
-            data-auto_prompt specifies if One Tap is to be shown or not, should not be shown in log in page
-            https://developers.google.com/identity/gsi/web/tools/configurator
-            https://developers.google.com/identity/gsi/web/reference/html-reference#data-attributes
-            -->
+        <!-- This line of code controls how the sign in button and page in general behaves when it comes to Googles sign in API -->
         <div id="g_id_onload" data-client_id="732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com" data-context="signin" data-auto_prompt="false" data-ux_mode="redirect" data-login_uri="http://localhost:8042/loggedIn" data-callback="handleCredentialResponse"></div>
 
         <!-- This is the sign in button -->

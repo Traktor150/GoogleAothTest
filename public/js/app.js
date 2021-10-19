@@ -6,28 +6,6 @@ console.log('app.js is alive!')
 // If same user logs in twice no new g_csrf_token is created
 // g_csrf_token probalby has a time limit
 
-function showCookies() {
-    const output = document.getElementById('cookies')
-    output.textContent = '> ' + document.cookie
-}
-
-function clearOutputCookies() {
-    const output = document.getElementById('cookies')
-    output.textContent = ''
-}
-
-function checkCookieHasASpecificValue(credential) {
-    if (document.cookie.indexOf(credential)) {
-        const output = document.getElementById('a-specific-value-of-the-cookie')
-        output.textContent = '> The cookie "reader" has a value of "1"'
-    }
-}
-
-function clearASpecificValueOfTheCookie() {
-    const output = document.getElementById('a-specific-value-of-the-cookie')
-    output.textContent = ''
-}
-
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     // "credential" is a coded id token that has the users information
@@ -35,9 +13,6 @@ function handleCredentialResponse(response) {
     // JWT stands for JSON Web Token
     // Link to documentation
     // https://developers.google.com/identity/gsi/web/guides/handle-credential-responses-js-functions
-
-    checkCookieHasASpecificValue(response.credential)
-    document.cookie = response.credential;
 
     const responsePayload = decodeJwtResponse(response.credential);
     // decodeJwtResponse() is a custom function defined by you

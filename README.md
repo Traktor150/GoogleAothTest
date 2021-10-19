@@ -1,4 +1,4 @@
-# Guide to Google Sing In API
+# Guide to Google Sign In API
 
 ## Start up project in Google Developer Console
 This is a must if you want your sign in button to work

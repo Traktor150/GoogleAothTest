@@ -7,6 +7,13 @@ console.log(document.cookie)
 // If same user logs in twice no new g_csrf_token is created
 // g_csrf_token probalby has a time limit
 
+window.onload = function() {
+    google.accounts.id.initialize({
+        client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+    });
+}
+
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
 
@@ -22,12 +29,6 @@ function handleCredentialResponse(response) {
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
-}
-window.onload = function() {
-    google.accounts.id.initialize({
-        client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
-        callback: handleCredentialResponse,
-    });
 }
 
 function decodeJwtResponse(token) {

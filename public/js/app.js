@@ -1,6 +1,7 @@
 'use strict';
 
 console.log('app.js is alive!')
+console.log(document.cookie)
 
 // A new g_csrf_token is created eveytime a new user logs in
 // If same user logs in twice no new g_csrf_token is created
@@ -10,6 +11,7 @@ function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
 
     const responsePayload = decodeJwtResponse(response.credential);
+    responsePayload = verify(response.credential);
 
     // responePayload contains the information from the decoded JWT
     console.log("ID: " + responsePayload.sub);
@@ -18,6 +20,7 @@ function handleCredentialResponse(response) {
     console.log('Family Name: ' + responsePayload.family_name);
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
+    console.log(document.cookie)
 }
 window.onload = function() {
     google.accounts.id.initialize({
@@ -36,3 +39,19 @@ function decodeJwtResponse(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 };
+
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(CLIENT_ID);
+async function verify() {
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
+        // Or, if multiple clients access the backend:
+        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+    });
+    const payload = ticket.getPayload();
+    const userid = payload['sub'];
+    // If request specified a G Suite domain:
+    // const domain = payload['hd'];
+}
+verify().catch(console.error);

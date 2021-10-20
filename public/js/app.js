@@ -1,9 +1,17 @@
 'use strict';
 
-console.log('app.js is alive!')
-    // A new g_csrf_token is created eveytime a new user logs in
-    // If same user logs in twice no new g_csrf_token is created
-    // g_csrf_token probalby has a time limit
+window.onload = function() {
+    google.accounts.id.initialize({
+        client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+    });
+    console.log('app.js is alive!')
+    console.log(document.cookie)
+}
+
+// A new g_csrf_token is created eveytime a new user logs in
+// If same user logs in twice no new g_csrf_token is created
+// g_csrf_token probalby has a time limit
 
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
@@ -18,13 +26,6 @@ function handleCredentialResponse(response) {
     console.log('Family Name: ' + responsePayload.family_name);
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
-}
-
-window.onload = function() {
-    google.accounts.id.initialize({
-        client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
-        callback: handleCredentialResponse,
-    });
     console.log(document.cookie)
 }
 

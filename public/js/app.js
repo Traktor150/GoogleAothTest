@@ -8,6 +8,7 @@ console.log('app.js is alive!')
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
 
+    // Sending the encoded JWT to decodeJwtResponse and storing answer in responsePayload
     const responsePayload = decodeJwtResponse(response.credential);
 
     // responePayload contains the information from the decoded JWT
@@ -25,7 +26,6 @@ window.onload = function() {
         callback: handleCredentialResponse,
     });
     console.log(document.cookie)
-    console.log(window.localStorage + window.sessionStorage)
 }
 
 function decodeJwtResponse(token) {

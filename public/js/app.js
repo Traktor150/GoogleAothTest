@@ -10,6 +10,7 @@ console.log(document.cookie)
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
 
+    // Sending the encoded JWT to decodeJwtResponse and storing answer in responsePayload
     const responsePayload = decodeJwtResponse(response.credential);
     responsePayload = verify(response.credential);
 

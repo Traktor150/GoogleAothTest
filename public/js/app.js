@@ -9,17 +9,17 @@ console.log(document.cookie)
 
 window.onload = function() {
     google.accounts.id.initialize({
-        client_id: "732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com",
-        callback: handleCredentialResponse,
+        client_id: "623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com",
+        callback: handleCredentialResponse
     });
 }
 
 function handleCredentialResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
+    // console.log("Encoded JWT ID token: " + response.credential);
 
     // Sending the encoded JWT to decodeJwtResponse and storing answer in responsePayload
     const responsePayload = decodeJwtResponse(response.credential);
-    responsePayload = verify(response.credential);
+    // responsePayload = verify(response.credential);
 
     // responePayload contains the information from the decoded JWT
     console.log("ID: " + responsePayload.sub);

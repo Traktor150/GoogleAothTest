@@ -7,9 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Calls to the Google library -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <script src="js/app.js"></script>
 
-    <title>GoogleAPI Demo - OAK</title>
+    <title>GoogleAPI Demo - Ice + William</title>
 </head>
 
 <!-- 
@@ -24,7 +28,7 @@
  -->
 
 <body>
-    <h1>Home<br>GoogleAPI Demo - OAK</h1>
+    <h1>Home<br>GoogleAPI Demo - Ice + William</h1>
 
     <a href="/">Home</a>
     <a href="loggedIn">Logged in</a>
@@ -34,11 +38,11 @@
     <hr>
 
     <div>
-        <!-- Calls to the Google library -->
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        
 
         <!-- This line of code controls how the sign in button and page in general behaves when it comes to Googles sign in API -->
-        <div id="g_id_onload" data-client_id="732451709774-58h1h3tbgr6c6c6ouce7lot3vh6d96u8.apps.googleusercontent.com" data-context="signin" data-auto_prompt="false" data-ux_mode="redirect" data-login_uri="http://localhost:8042/loggedIn" data-callback="handleCredentialResponse"></div>
+        <div id="g_id_onload" data-client_id="623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com" data-context="signin" 
+        data-auto_prompt="false" data-ux_mode="redirect" data-login_uri="http://localhost:8080/loggedIn" data-callback="handleCredentialResponse"></div>
 
         <!-- This is the sign in button -->
         <div class="g_id_signin" data-type="standard"></div>
